@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI — Protect Yourself from Online Scams</title>
+    <meta name="description" content="AI-powered scam detection tool. Analyze suspicious messages, links, and phone numbers instantly. Stay safe from phishing, UPI fraud, and digital arrest scams.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">Scam<span class="logo-highlight">Shield</span> AI</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#analyze" class="nav-link">Analyze</a>
+                <a href="#chat" class="nav-link">AI Chat</a>
+                <a href="#stats" class="nav-link">Stats</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                AI-Powered Protection
+            </div>
+            <h1 class="hero-title">
+                Don't Get <span class="gradient-text">Scammed.</span><br>
+                Get <span class="gradient-text-alt">Protected.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Instantly detect fake messages, phishing links, and fraud calls using advanced AI. 
+                Protect yourself and your loved ones from online scams.
+            </p>
+            <div class="hero-actions">
+                <a href="#analyze" class="btn btn-primary">
+                    <span>🔍</span> Start Analyzing
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    Learn More →
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="15847">0</span>
+                    <span class="stat-label">Scams Detected</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="98">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Accuracy Rate</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50000">0</span>
+                    <span class="stat-label">Users Protected</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="shield-container">
+                <div class="shield-ring ring-1"></div>
+                <div class="shield-ring ring-2"></div>
+                <div class="shield-ring ring-3"></div>
+                <div class="shield-icon">🛡️</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Features</span>
+                <h2 class="section-title">How ScamShield <span class="gradient-text">Protects</span> You</h2>
+                <p class="section-subtitle">Our AI engine analyzes multiple threat vectors to keep you safe</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">📩</div>
+                    <h3>Message Scanner</h3>
+                    <p>Paste any WhatsApp or SMS message and our AI will instantly detect if it's a scam, phishing attempt, or fraud.</p>
+                    <a href="#analyze" class="feature-link">Try it →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="100">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Link Checker</h3>
+                    <p>Verify suspicious URLs before clicking. We check for phishing domains, fake payment pages, and malware links.</p>
+                    <a href="#analyze" class="feature-link">Try it →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="200">
+                    <div class="feature-icon">📞</div>
+                    <h3>Phone Lookup</h3>
+                    <p>Check if a phone number has been reported for scam calls, fake customer care, or digital arrest fraud.</p>
+                    <a href="#analyze" class="feature-link">Try it →</a>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="300">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Chat Assistant</h3>
+                    <p>Not sure if something's a scam? Chat with our AI assistant and get instant advice on suspicious activities.</p>
+                    <a href="#chat" class="feature-link">Try it →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section section-dark" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Process</span>
+                <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Paste or Enter</h3>
+                        <p>Copy-paste a suspicious message, link, or phone number into ScamShield</p>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>AI Analysis</h3>
+                        <p>Our AI engine analyzes patterns, language, URLs, and reputation data</p>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Get Results</h3>
+                        <p>Receive a risk score, detailed explanation, and safety recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analyze Section -->
+    <section class="section" id="analyze">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Analyze</span>
+                <h2 class="section-title">Check for <span class="gradient-text">Scams</span> Now</h2>
+                <p class="section-subtitle">Select what you want to analyze</p>
+            </div>
+
+            <!-- Analyzer Tabs -->
+            <div class="analyzer-container">
+                <div class="analyzer-tabs">
+                    <button class="tab-btn active" data-tab="message" id="tab-message">
+                        <span>📩</span> Message
+                    </button>
+                    <button class="tab-btn" data-tab="link" id="tab-link">
+                        <span>🔗</span> Link
+                    </button>
+                    <button class="tab-btn" data-tab="phone" id="tab-phone">
+                        <span>📞</span> Phone
+                    </button>
+                </div>
+
+                <!-- Message Tab -->
+                <div class="tab-content active" id="content-message">
+                    <div class="analyzer-card">
+                        <h3>📩 Message Analyzer</h3>
+                        <p>Paste the suspicious WhatsApp/SMS message below</p>
+                        <textarea class="input-area" id="messageInput" placeholder="Paste the suspicious message here...&#10;&#10;Example: 'Dear customer, your SBI account has been blocked. Click here to verify: http://sbi-verify.tk/login'" rows="5"></textarea>
+                        <button class="btn btn-primary btn-analyze" id="analyzeMessage" onclick="analyzeMessage()">
+                            <span class="btn-icon">🔍</span>
+                            <span class="btn-text">Analyze Message</span>
+                            <span class="btn-loader" style="display:none"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Link Tab -->
+                <div class="tab-content" id="content-link">
+                    <div class="analyzer-card">
+                        <h3>🔗 Link Checker</h3>
+                        <p>Paste the suspicious URL below</p>
+                        <input type="url" class="input-field" id="linkInput" placeholder="https://suspicious-link-example.tk/verify">
+                        <button class="btn btn-primary btn-analyze" id="analyzeLink" onclick="analyzeLink()">
+                            <span class="btn-icon">🔍</span>
+                            <span class="btn-text">Check Link</span>
+                            <span class="btn-loader" style="display:none"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Phone Tab -->
+                <div class="tab-content" id="content-phone">
+                    <div class="analyzer-card">
+                        <h3>📞 Phone Number Lookup</h3>
+                        <p>Enter the suspicious phone number</p>
+                        <input type="tel" class="input-field" id="phoneInput" placeholder="+91 98765 43210">
+                        <button class="btn btn-primary btn-analyze" id="analyzePhone" onclick="analyzePhone()">
+                            <span class="btn-icon">🔍</span>
+                            <span class="btn-text">Check Number</span>
+                            <span class="btn-loader" style="display:none"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="results-panel" id="resultsPanel" style="display:none">
+                    <div class="results-header">
+                        <h3>Analysis Results</h3>
+                        <button class="btn-close" onclick="closeResults()">✕</button>
+                    </div>
+                    <div class="results-body">
+                        <!-- Risk Score Gauge -->
+                        <div class="risk-gauge-container">
+                            <div class="risk-gauge" id="riskGauge">
+                                <svg viewBox="0 0 200 200" class="gauge-svg">
+                                    <circle cx="100" cy="100" r="85" class="gauge-bg"></circle>
+                                    <circle cx="100" cy="100" r="85" class="gauge-fill" id="gaugeFill"></circle>
+                                </svg>
+                                <div class="gauge-center">
+                                    <span class="gauge-score" id="gaugeScore">0</span>
+                                    <span class="gauge-label" id="gaugeLabel">Analyzing...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Risk Level Badge -->
+                        <div class="risk-badge" id="riskBadge">
+                            <span class="risk-icon" id="riskIcon">⏳</span>
+                            <span class="risk-text" id="riskText">Analyzing</span>
+                        </div>
+                        <!-- Analysis Details -->
+                        <div class="analysis-details" id="analysisDetails">
+                            <div class="detail-section">
+                                <h4>🧠 AI Analysis</h4>
+                                <p id="analysisReason">Loading...</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>🚩 Red Flags Found</h4>
+                                <ul id="redFlagsList"></ul>
+                            </div>
+                            <div class="detail-section">
+                                <h4>🛡️ Safety Tips</h4>
+                                <ul id="safetyTipsList"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Section -->
+    <section class="section section-dark" id="chat">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">AI Assistant</span>
+                <h2 class="section-title">Chat with <span class="gradient-text">ScamShield AI</span></h2>
+                <p class="section-subtitle">Ask anything about online scams, fraud, or suspicious activities</p>
+            </div>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message bot">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-bubble">
+                            <p>Hi! I'm ScamShield AI assistant. 👋</p>
+                            <p>Ask me anything about online scams, suspicious messages, or how to stay safe online. I'm here to help!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-suggestions">
+                    <button class="suggestion-chip" onclick="sendSuggestion(this)">Is this UPI request safe?</button>
+                    <button class="suggestion-chip" onclick="sendSuggestion(this)">How to identify fake calls?</button>
+                    <button class="suggestion-chip" onclick="sendSuggestion(this)">What is digital arrest scam?</button>
+                    <button class="suggestion-chip" onclick="sendSuggestion(this)">Tips to stay safe online</button>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Type your question..." onkeypress="if(event.key==='Enter')sendChatMessage()">
+                    <button class="btn-send" id="sendBtn" onclick="sendChatMessage()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section" id="stats">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Impact</span>
+                <h2 class="section-title">Scam <span class="gradient-text">Statistics</span> in India</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-icon">💰</div>
+                    <div class="stat-card-number">₹1,750 Cr+</div>
+                    <div class="stat-card-desc">Lost to cyber fraud in 2024</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">📱</div>
+                    <div class="stat-card-number">6.9 Lakh+</div>
+                    <div class="stat-card-desc">Fraud complaints filed (2024)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">👴</div>
+                    <div class="stat-card-number">43%</div>
+                    <div class="stat-card-desc">Victims are senior citizens</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">🔗</div>
+                    <div class="stat-card-number">72%</div>
+                    <div class="stat-card-desc">Scams start with a phishing link</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Common Scams Section -->
+    <section class="section section-dark" id="scam-types">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Awareness</span>
+                <h2 class="section-title">Common <span class="gradient-text">Scam Types</span></h2>
+            </div>
+            <div class="scams-grid">
+                <div class="scam-card">
+                    <div class="scam-icon">🏦</div>
+                    <h3>Fake Bank Alerts</h3>
+                    <p>"Your account is blocked, click to verify" — Banks never send such messages with links.</p>
+                </div>
+                <div class="scam-card">
+                    <div class="scam-icon">💸</div>
+                    <h3>UPI Fraud</h3>
+                    <p>Fraudsters send collect requests or fake payment screenshots to trick you into sending money.</p>
+                </div>
+                <div class="scam-card">
+                    <div class="scam-icon">🚔</div>
+                    <h3>Digital Arrest</h3>
+                    <p>Scammers impersonate police/CBI via video call and demand money to "clear your name."</p>
+                </div>
+                <div class="scam-card">
+                    <div class="scam-icon">🔑</div>
+                    <h3>OTP Fraud</h3>
+                    <p>"Share OTP for verification" — No legitimate service will ever ask for your OTP on a call.</p>
+                </div>
+                <div class="scam-card">
+                    <div class="scam-icon">🎁</div>
+                    <h3>Lottery/Prize Scam</h3>
+                    <p>"You've won ₹50 Lakhs! Pay processing fee." — If you didn't enter, you didn't win.</p>
+                </div>
+                <div class="scam-card">
+                    <div class="scam-icon">💼</div>
+                    <h3>Job Scam</h3>
+                    <p>"Work from home, earn ₹50K/day" — Unrealistic offers that ask for registration fees are scams.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🛡️</span>
+                    <span class="logo-text">Scam<span class="logo-highlight">Shield</span> AI</span>
+                    <p>AI-powered protection against online scams.<br>Stay safe. Stay aware.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#analyze">Analyze</a>
+                    <a href="#chat">AI Chat</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="https://cybercrime.gov.in" target="_blank">Report Cybercrime</a>
+                    <a href="https://www.cert-in.org.in" target="_blank">CERT-IN</a>
+                    <a href="#scam-types">Common Scams</a>
+                    <a href="#stats">Fraud Stats</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Built with ❤️ for making India scam-free | Hackathon 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

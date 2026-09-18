@@ -4,10 +4,12 @@ ScamShield AI — Vercel Serverless FastAPI Entrypoint
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel
 from typing import Optional, List
 import re
 import hashlib
+import os
 
 app = FastAPI(
     title="ScamShield AI API",
@@ -64,8 +66,52 @@ SUSPICIOUS_TLDS = [".tk", ".ml", ".ga", ".cf", ".gq", ".xyz", ".top", ".club", "
 TRUSTED_DOMAINS = ["google.com", "facebook.com", "amazon.in", "flipkart.com", "paytm.com", "sbi.co.in", "hdfcbank.com", "icicibank.com", "rbi.org.in", "gov.in", "nic.in", "npci.org.in", "github.com", "youtube.com", "wikipedia.org"]
 
 
+DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(DIR)
+
+def find_asset(filename: str):
+    for dirpath in [DIR, ROOT_DIR, os.path.join(ROOT_DIR, "backend")]:
+        target = os.path.join(dirpath, filename)
+        if os.path.exists(target):
+            return target
+    return None
+
+@app.get("/", response_class=HTMLResponse)
+def serve_home():
+    path = find_asset("index.html")
+    if path:
+        with open(path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), media_type="text/html")
+    return HTMLResponse("<h1>🛡️ ScamShield AI is Running!</h1>")
+
+@app.get("/style.css")
+def serve_css():
+    path = find_asset("style.css")
+    if path:
+        with open(path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), media_type="text/css")
+    return HTMLResponse(status_code=404)
+
+@app.get("/app.js")
+def serve_js():
+    path = find_asset("app.js")
+    if path:
+        with open(path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), media_type="application/javascript")
+    return HTMLResponse(status_code=404)
+
+@app.get("/presentation", response_class=HTMLResponse)
+@app.get("/presentation/", response_class=HTMLResponse)
+def serve_presentation():
+    path = find_asset(os.path.join("presentation", "index.html"))
+    if path:
+        with open(path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), media_type="text/html")
+    return HTMLResponse(status_code=404)
+
 @app.get("/api")
 @app.get("/api/")
+@app.get("/health")
 def root():
     return {"status": "ok", "message": "🛡️ ScamShield AI Serverless API is running!", "version": "1.0.0"}
 

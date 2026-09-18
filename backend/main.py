@@ -5,10 +5,12 @@ Run: uvicorn main:app --reload --port 8000
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 import re
 import hashlib
+import os
 
 app = FastAPI(
     title="ScamShield AI API",
@@ -65,12 +67,54 @@ SUSPICIOUS_TLDS = [".tk", ".ml", ".ga", ".cf", ".gq", ".xyz", ".top", ".club", "
 TRUSTED_DOMAINS = ["google.com", "facebook.com", "amazon.in", "flipkart.com", "paytm.com", "sbi.co.in", "hdfcbank.com", "icicibank.com", "rbi.org.in", "gov.in"]
 
 
-@app.get("/")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(BASE_DIR)
+
+def find_asset(filename: str):
+    for dirpath in [BASE_DIR, PARENT_DIR]:
+        target = os.path.join(dirpath, filename)
+        if os.path.exists(target):
+            return target
+    return None
+
+@app.get("/", response_class=HTMLResponse)
 def root():
+    path = find_asset("index.html")
+    if path:
+        return FileResponse(path, media_type="text/html")
+    return HTMLResponse("<h1>🛡️ ScamShield AI is Running!</h1>")
+
+@app.get("/style.css")
+def get_style():
+    path = find_asset("style.css")
+    if path:
+        return FileResponse(path, media_type="text/css")
+    return HTMLResponse(status_code=404)
+
+@app.get("/app.js")
+def get_app_js():
+    path = find_asset("app.js")
+    if path:
+        return FileResponse(path, media_type="application/javascript")
+    return HTMLResponse(status_code=404)
+
+@app.get("/presentation", response_class=HTMLResponse)
+@app.get("/presentation/", response_class=HTMLResponse)
+def get_presentation():
+    path = find_asset("presentation/index.html")
+    if path:
+        return FileResponse(path, media_type="text/html")
+    return HTMLResponse(status_code=404)
+
+@app.get("/api")
+@app.get("/api/")
+@app.get("/health")
+def api_status():
     return {"message": "🛡️ ScamShield AI API is running!", "version": "1.0.0"}
 
 
 @app.post("/analyze/message", response_model=AnalysisResult)
+@app.post("/api/analyze/message", response_model=AnalysisResult)
 def analyze_message(req: MessageRequest):
     text = req.text
     lower = text.lower()
@@ -154,6 +198,7 @@ def analyze_message(req: MessageRequest):
 
 
 @app.post("/analyze/link", response_model=AnalysisResult)
+@app.post("/api/analyze/link", response_model=AnalysisResult)
 def analyze_link(req: LinkRequest):
     url = req.url
     flags = []
@@ -222,6 +267,7 @@ def analyze_link(req: LinkRequest):
 
 
 @app.post("/analyze/phone", response_model=AnalysisResult)
+@app.post("/api/analyze/phone", response_model=AnalysisResult)
 def analyze_phone(req: PhoneRequest):
     phone = re.sub(r'[\s\-\(\)]', '', req.phone)
     flags = []
@@ -259,6 +305,7 @@ def analyze_phone(req: PhoneRequest):
 
 
 @app.post("/chat", response_model=ChatResponse)
+@app.post("/api/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
     msg = req.message.lower()
 

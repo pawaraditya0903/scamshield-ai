@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI — Hackathon Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <style>
+        /* ===== Custom Theme ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --bg: #060a1a;
+            --surface: #0d1330;
+            --card: rgba(15, 23, 60, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e8eaf6;
+            --text-dim: #8b92b3;
+            --cyan: #00f0ff;
+            --purple: #7c3aed;
+            --pink: #ec4899;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+        }
+
+        .reveal {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            font-size: 22px;
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .reveal .slides section {
+            background: var(--bg);
+            padding: 60px 80px;
+            height: 100%;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Background effects */
+        .reveal .slides section::before {
+            content: '';
+            position: absolute;
+            top: -100px; right: -100px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .reveal .slides section::after {
+            content: '';
+            position: absolute;
+            bottom: -150px; left: -150px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .reveal .slides section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Grid background */
+        .reveal .slides section {
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-color: var(--bg);
+        }
+
+        /* Typography */
+        .reveal h1 {
+            font-size: 3.2em;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: var(--text);
+        }
+
+        .reveal h2 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 28px;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .reveal h3 {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .reveal p, .reveal li {
+            color: var(--text-dim);
+            line-height: 1.7;
+            font-size: 0.85em;
+        }
+
+        .reveal ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .reveal li {
+            padding: 6px 0 6px 28px;
+            position: relative;
+        }
+
+        .reveal li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: bold;
+        }
+
+        /* Gradient text */
+        .grad {
+            background: linear-gradient(135deg, #00f0ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grad-alt {
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.65em;
+            color: var(--cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        /* Cards grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .card-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .card-grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .card h3 {
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 0.75em;
+            line-height: 1.5;
+        }
+
+        .card-icon {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Highlight card */
+        .card-highlight {
+            border-color: rgba(0, 240, 255, 0.2);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        /* Stats inline */
+        .stats-row {
+            display: flex;
+            gap: 24px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-big {
+            font-size: 1.8em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00f0ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-desc {
+            font-size: 0.65em;
+            color: var(--text-dim);
+        }
+
+        /* Two columns */
+        .cols {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        /* Tech stack badges */
+        .tech-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 8px;
+            font-size: 0.7em;
+            color: var(--purple);
+            font-weight: 600;
+            margin: 4px;
+        }
+
+        .tech-badge.cyan {
+            background: rgba(0, 240, 255, 0.08);
+            border-color: rgba(0, 240, 255, 0.2);
+            color: var(--cyan);
+        }
+
+        .tech-badge.pink {
+            background: rgba(236, 72, 153, 0.08);
+            border-color: rgba(236, 72, 153, 0.2);
+            color: var(--pink);
+        }
+
+        .tech-badge.green {
+            background: rgba(34, 197, 94, 0.08);
+            border-color: rgba(34, 197, 94, 0.2);
+            color: var(--green);
+        }
+
+        /* Flow diagram */
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .flow-step .step-icon {
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .flow-step .step-text {
+            font-size: 0.7em;
+            color: var(--text-dim);
+        }
+
+        .flow-arrow {
+            color: var(--cyan);
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        /* Risk colors */
+        .risk-safe { color: var(--green); }
+        .risk-warn { color: var(--yellow); }
+        .risk-danger { color: var(--red); }
+
+        /* Footer/slide number */
+        .slide-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6em;
+            color: var(--text-dim);
+            z-index: 2;
+        }
+
+        /* Title slide centered */
+        .title-slide {
+            text-align: center !important;
+            align-items: center !important;
+        }
+
+        .title-slide h1 {
+            font-size: 3.5em;
+        }
+
+        /* Thank you slide */
+        .thankyou-slide {
+            text-align: center !important;
+            align-items: center !important;
+        }
+
+        .thankyou-slide h1 {
+            font-size: 4em;
+        }
+
+        /* Challenge card */
+        .challenge-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .challenge-item {
+            flex: 1;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .challenge-item h4 {
+            font-size: 0.8em;
+            color: var(--yellow);
+            margin-bottom: 6px;
+        }
+
+        .challenge-item p {
+            font-size: 0.7em;
+        }
+
+        .solution-item h4 {
+            color: var(--green) !important;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
+
+        /* Feature list with icons */
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 12px 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .feature-item .f-icon {
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+
+        .feature-item .f-text h4 {
+            font-size: 0.85em;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .feature-item .f-text p {
+            font-size: 0.7em;
+            margin: 0;
+        }
+
+        /* Progress / navigation */
+        .reveal .progress {
+            background: rgba(255,255,255,0.05);
+            color: var(--cyan);
+            height: 4px;
+        }
+
+        .reveal .controls {
+            color: var(--cyan);
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- ============ SLIDE 1: TITLE ============ -->
+            <section class="title-slide">
+                <span class="badge">Hackathon 2026</span>
+                <div style="font-size:4em; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(0,240,255,0.4));">🛡️</div>
+                <h1>Scam<span class="grad">Shield</span> AI</h1>
+                <p style="font-size: 1.1em; color: var(--text-dim); margin-bottom: 30px;">
+                    AI-Powered Protection Against Online Scams
+                </p>
+                <div style="margin-bottom: 16px;">
+                    <span class="tech-badge cyan">AI Agents</span>
+                    <span class="tech-badge">Cybersecurity</span>
+                    <span class="tech-badge pink">FinTech</span>
+                </div>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 0.85em; color: var(--text);">
+                        <strong>Team Name:</strong> <span class="grad">[Your Team Name]</span>
+                    </p>
+                    <p style="font-size: 0.8em;">
+                        [Member 1] &nbsp;•&nbsp; [Member 2] &nbsp;•&nbsp; [Member 3] &nbsp;•&nbsp; [Member 4]
+                    </p>
+                    <p style="font-size: 0.75em;">[Your College Name]</p>
+                </div>
+                <div class="slide-footer">
+                    <span>ScamShield AI</span>
+                    <span>1 / 6</span>
+                </div>
+            </section>
+
+            <!-- ============ SLIDE 2: IDEA & SOLUTION ============ -->
+            <section>
+                <span class="badge">Problem & Solution</span>
+                <h2>The <span class="grad">Problem</span> & Our Solution</h2>
+
+                <div class="cols">
+                    <div class="col">
+                        <h3>🚨 The Problem</h3>
+                        <p>Cyber fraud in India is growing at an alarming rate. Common scams include:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>Fake WhatsApp/SMS messages with phishing links</li>
+                            <li>UPI payment fraud & fake collect requests</li>
+                            <li>"Digital Arrest" scams impersonating police/CBI</li>
+                            <li>OTP theft & fake bank notifications</li>
+                            <li>Lottery/job scams targeting vulnerable users</li>
+                        </ul>
+                        <div class="stats-row" style="margin-top: 16px;">
+                            <div class="stat-box">
+                                <span class="stat-big">₹1,750 Cr+</span>
+                                <span class="stat-desc">Lost to fraud (2024)</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-big">6.9L+</span>
+                                <span class="stat-desc">Complaints filed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h3>💡 Our Solution</h3>
+                        <p>An AI-powered web app that helps users <strong style="color: var(--cyan);">identify scams before they act</strong>.</p>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <span class="f-icon">📩</span>
+                                <div class="f-text">
+                                    <h4>Message Scanner</h4>
+                                    <p>Paste suspicious SMS/WhatsApp messages for instant AI analysis</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="f-icon">🔗</span>
+                                <div class="f-text">
+                                    <h4>Link Checker</h4>
+                                    <p>Verify URLs for phishing, fake domains & malware</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="f-icon">📞</span>
+                                <div class="f-text">
+                                    <h4>Phone Lookup</h4>
+                                    <p>Check phone number reputation against scam reports</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="f-icon">🤖</span>
+                                <div class="f-text">
+                                    <h4>AI Chat Assistant</h4>
+                                    <p>Chat with AI to get advice on suspicious activities</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 16px;">
+                            <strong>Who is affected?</strong> General public, senior citizens, students, online shoppers, UPI users — <strong style="color: var(--red);">everyone</strong> is a potential target.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="slide-footer">
+                    <span>ScamShield AI</span>
+                    <span>2 / 6</span>
+                </div>
+            </section>
+
+            <!-- ============ SLIDE 3: TECHNICAL APPROACH ============ -->
+            <section>
+                <span class="badge">Technical Approach</span>
+                <h2>How It <span class="grad">Works</span></h2>
+
+                <!-- Tech Stack -->
+                <div class="cols">
+                    <div class="col">
+                        <h3>🛠 Tech Stack</h3>
+                        <div style="margin: 12px 0;">
+                            <span class="tech-badge cyan">HTML / CSS / JS</span>
+                            <span class="tech-badge">FastAPI (Python)</span>
+                            <span class="tech-badge pink">Gemini AI API</span>
+                            <span class="tech-badge green">Firebase</span>
+                            <span class="tech-badge cyan">Google Safe Browsing</span>
+                            <span class="tech-badge">REST API</span>
+                        </div>
+
+                        <h3 style="margin-top: 20px;">⚙️ Architecture</h3>
+                        <div class="flow">
+                            <div class="flow-step">
+                                <span class="step-icon">👤</span>
+                                <span class="step-text">User Input</span>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-step">
+                                <span class="step-icon">🌐</span>
+                                <span class="step-text">Frontend</span>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-step">
+                                <span class="step-icon">⚡</span>
+                                <span class="step-text">FastAPI</span>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-step">
+                                <span class="step-icon">🤖</span>
+                                <span class="step-text">AI Engine</span>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-step">
+                                <span class="step-icon">📊</span>
+                                <span class="step-text">Risk Score</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h3>🔑 Key Features (Technical)</h3>
+                        <ul>
+                            <li><strong>NLP-based scam detection</strong> — Pattern matching across 8 scam categories (urgency, phishing, threats, etc.)</li>
+                            <li><strong>URL analysis engine</strong> — Checks TLDs, domain spoofing, IP-based URLs, SSL, URL shorteners</li>
+                            <li><strong>Phone reputation system</strong> — Community-based reporting with hash-based lookups</li>
+                            <li><strong>Animated Risk Gauge</strong> — Visual risk score from 0-100 with color coding</li>
+                            <li><strong>AI Chat Interface</strong> — Context-aware responses about scam types and safety</li>
+                            <li><strong>Real-time analysis</strong> — Results in under 2 seconds</li>
+                        </ul>
+
+                        <h3 style="margin-top: 20px;">📐 Process</h3>
+                        <ul>
+                            <li>User pastes message / link / phone number</li>
+                            <li>Frontend sends request to FastAPI backend</li>
+                            <li>AI engine analyzes using pattern matching + Gemini API</li>
+                            <li>Returns: Risk Score + Explanation + Safety Tips</li>
+                            <li>Frontend displays animated results with risk gauge</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="slide-footer">
+                    <span>ScamShield AI</span>
+                    <span>3 / 6</span>
+                </div>
+            </section>
+
+            <!-- ============ SLIDE 4: FEASIBILITY & IMPACT ============ -->
+            <section>
+                <span class="badge">Feasibility & Impact</span>
+                <h2>Feasibility & <span class="grad">Real-World Impact</span></h2>
+
+                <div class="cols">
+                    <div class="col">
+                        <h3>✅ Why This Is Feasible</h3>
+                        <ul>
+                            <li><strong>Uses proven technologies</strong> — Python, FastAPI, and modern web standards</li>
+                            <li><strong>AI APIs are accessible</strong> — Gemini API provides powerful NLP at no/low cost</li>
+                            <li><strong>No hardware needed</strong> — Works entirely in browser + cloud backend</li>
+                            <li><strong>MVP in 24 hours</strong> — Simple architecture allows rapid prototyping</li>
+                            <li><strong>Scalable design</strong> — Microservice architecture can handle growth</li>
+                        </ul>
+
+                        <h3 style="margin-top: 24px;">🎯 Target Users</h3>
+                        <div class="card-grid" style="margin-top: 12px;">
+                            <div class="card" style="padding: 14px; text-align: center;">
+                                <span style="font-size: 1.5em;">👴</span>
+                                <p style="font-size: 0.7em; margin: 0;">Senior Citizens</p>
+                            </div>
+                            <div class="card" style="padding: 14px; text-align: center;">
+                                <span style="font-size: 1.5em;">🎓</span>
+                                <p style="font-size: 0.7em; margin: 0;">Students</p>
+                            </div>
+                            <div class="card" style="padding: 14px; text-align: center;">
+                                <span style="font-size: 1.5em;">🛒</span>
+                                <p style="font-size: 0.7em; margin: 0;">Online Shoppers</p>
+                            </div>
+                            <div class="card" style="padding: 14px; text-align: center;">
+                                <span style="font-size: 1.5em;">💳</span>
+                                <p style="font-size: 0.7em; margin: 0;">UPI Users</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h3>⚠️ Challenges & Solutions</h3>
+
+                        <div class="challenge-row" style="flex-direction: column; gap: 12px;">
+                            <div class="challenge-item">
+                                <h4>⚠️ Challenge: Evolving Scam Patterns</h4>
+                                <p>Scammers constantly change their language and tactics.</p>
+                                <h4 class="solution-item" style="margin-top: 8px;">✅ Solution: Continuous AI Training</h4>
+                                <p>Regular model updates with new scam datasets. Community reporting feeds back into the system.</p>
+                            </div>
+                            <div class="challenge-item">
+                                <h4>⚠️ Challenge: False Positives</h4>
+                                <p>Legitimate messages may be flagged as scams.</p>
+                                <h4 class="solution-item" style="margin-top: 8px;">✅ Solution: Multi-Factor Analysis</h4>
+                                <p>Scoring across 8 categories with weighted analysis. Users see reasoning, not just scores.</p>
+                            </div>
+                            <div class="challenge-item">
+                                <h4>⚠️ Challenge: User Adoption</h4>
+                                <p>Getting non-tech users to use the tool.</p>
+                                <h4 class="solution-item" style="margin-top: 8px;">✅ Solution: Dead-Simple UX</h4>
+                                <p>Copy-paste interface. One click analysis. WhatsApp bot integration planned.</p>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 20px;">📈 Scalability</h3>
+                        <ul>
+                            <li>Browser extension for real-time protection</li>
+                            <li>WhatsApp & Telegram bot integration</li>
+                            <li>API for banks & fintech companies</li>
+                            <li>Multi-language support (Hindi, Tamil, etc.)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="slide-footer">
+                    <span>ScamShield AI</span>
+                    <span>4 / 6</span>
+                </div>
+            </section>
+
+            <!-- ============ SLIDE 5: CONCLUSION & FUTURE ============ -->
+            <section>
+                <span class="badge">Conclusion</span>
+                <h2>Conclusion & <span class="grad">Future Enhancements</span></h2>
+
+                <div class="cols">
+                    <div class="col">
+                        <h3>🌟 Impact on Target Audience</h3>
+                        <ul>
+                            <li><strong>Empowers users</strong> to verify suspicious content before taking action</li>
+                            <li><strong>Protects senior citizens</strong> who are most vulnerable to scams</li>
+                            <li><strong>Educates the public</strong> about common fraud tactics</li>
+                            <li><strong>Saves money</strong> — preventing even one scam justifies the tool</li>
+                            <li><strong>Reduces fraud load</strong> on banks and law enforcement</li>
+                        </ul>
+
+                        <h3 style="margin-top: 24px;">📝 Conclusion</h3>
+                        <p style="font-size: 0.9em; line-height: 1.7; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 12px;">
+                            ScamShield AI addresses one of India's most pressing digital problems — <strong style="color: var(--cyan);">online fraud</strong>. 
+                            By combining AI-powered analysis with a simple, intuitive interface, we make it easy for <strong>anyone</strong> — 
+                            from tech-savvy students to elderly parents — to verify suspicious messages, links, and calls <strong>before they become victims</strong>. 
+                            Our tool doesn't just detect scams; it <strong style="color: var(--green);">educates and empowers</strong> users to stay safe in the digital world.
+                        </p>
+                    </div>
+                    <div class="col">
+                        <h3>🚀 Future Enhancements</h3>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <span class="f-icon">🔌</span>
+                                <div class="f-text">
+                                    <h4>Browser Extension</h4>
+                                    <p>Real-time phishing detection while browsing</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="f-icon">💬</span>
+                                <div class="f-text">
+                                    <h4>WhatsApp Bot</h4>
+                                    <p>Forward suspicious messages directly to bot for analysis</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="f-icon">🌐</span>
+                                <div class="f-text">
+                                    <h4>Multi-Language Support</h4>
+                                    <p>Hindi, Tamil, Telugu, Bengali — reaching all of India</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="f-icon">🏦</span>
+                                <div class="f-text">
+                                    <h4>Bank/FinTech API</h4>
+                                    <p>Integration with banking apps for proactive fraud prevention</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <span class="f-icon">📱</span>
+                                <div class="f-text">
+                                    <h4>Mobile App</h4>
+                                    <p>Native Android/iOS app with call screening</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 20px;">📚 References</h3>
+                        <ul style="font-size: 0.85em;">
+                            <li>CERT-IN Annual Report 2024 — cert-in.org.in</li>
+                            <li>National Cybercrime Portal — cybercrime.gov.in</li>
+                            <li>RBI Digital Payment Security — rbi.org.in</li>
+                            <li>Google Safe Browsing API Documentation</li>
+                            <li>Google Gemini API — ai.google.dev</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="slide-footer">
+                    <span>ScamShield AI</span>
+                    <span>5 / 6</span>
+                </div>
+            </section>
+
+            <!-- ============ SLIDE 6: THANK YOU ============ -->
+            <section class="thankyou-slide">
+                <div style="font-size: 4em; margin-bottom: 16px;">🛡️</div>
+                <h1><span class="grad">Thank You!</span></h1>
+                <p style="font-size: 1.1em; color: var(--text-dim); margin-bottom: 30px;">
+                    Together, let's make India scam-free.
+                </p>
+
+                <div style="background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 40px; display: inline-block; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 12px;">📧 Contact Us</h3>
+                    <p style="font-size: 0.85em; margin: 4px 0;">
+                        <strong>Team:</strong> <span class="grad">[Your Team Name]</span>
+                    </p>
+                    <p style="font-size: 0.85em; margin: 4px 0;">
+                        <strong>Email:</strong> [your-email@example.com]
+                    </p>
+                    <p style="font-size: 0.85em; margin: 4px 0;">
+                        <strong>GitHub:</strong> [github.com/your-repo]
+                    </p>
+                </div>
+
+                <p style="font-size: 0.8em; color: var(--text-dim);">
+                    <strong>🌐 Try the live demo:</strong> [your-demo-link]
+                </p>
+
+                <div style="margin-top: 20px;">
+                    <span class="tech-badge cyan">AI Agents</span>
+                    <span class="tech-badge">Cybersecurity</span>
+                    <span class="tech-badge pink">FinTech</span>
+                </div>
+
+                <div class="slide-footer">
+                    <span>ScamShield AI</span>
+                    <span>6 / 6</span>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
+            center: false,
+            slideNumber: false,
+            width: 1280,
+            height: 720,
+        });
+    </script>
+</body>
+</html>
